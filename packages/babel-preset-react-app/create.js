@@ -129,7 +129,7 @@ module.exports = function(api, opts, env) {
       require('@babel/plugin-syntax-dynamic-import').default,
       isEnvTest &&
         // Transform dynamic import to require
-        require('babel-plugin-transform-dynamic-import').default,
+        require('@hellomouse/babel-plugin-dynamic-import').default,
     ].filter(Boolean),
   };
 };
