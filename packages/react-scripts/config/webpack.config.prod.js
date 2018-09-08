@@ -224,7 +224,7 @@ module.exports = {
               // TODO: consider separate config for production,
               // e.g. to enable no-console and no-debugger only in production.
               baseConfig: {
-                extends: [require.resolve('eslint-config-react-app')],
+                extends: [require.resolve('@hellomouse/eslint-config-react-app')],
               },
               // @remove-on-eject-begin
               ignore: false,
@@ -268,10 +268,10 @@ module.exports = {
                   // @remove-on-eject-begin
                   babelrc: false,
                   // @remove-on-eject-end
-                  presets: [require.resolve('babel-preset-react-app')],
+                  presets: [require.resolve('@hellomouse/babel-preset-react-app')],
                   plugins: [
                     [
-                      require.resolve('babel-plugin-named-asset-import'),
+                      require.resolve('@hellomouse/babel-plugin-named-asset-import'),
                       {
                         loaderMap: {
                           svg: {
@@ -301,7 +301,7 @@ module.exports = {
                   babelrc: false,
                   compact: false,
                   presets: [
-                    require.resolve('babel-preset-react-app/dependencies'),
+                    require.resolve('@hellomouse/babel-preset-react-app/dependencies'),
                   ],
                   cacheDirectory: true,
                   highlightCode: true,
