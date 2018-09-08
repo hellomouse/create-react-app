@@ -1,8 +1,8 @@
 {
-  "name": "eslint-config-react-app",
+  "name": "@hellomouse/eslint-config-react-app",
   "version": "2.1.0",
   "description": "ESLint configuration used by Create React App",
-  "repository": "facebook/create-react-app",
+  "repository": "hellomouse/create-react-app",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/facebook/create-react-app/issues"
@@ -11,14 +11,14 @@
     "index.js"
   ],
   "peerDependencies": {
-    "babel-eslint": "^8.2.2",
-    "eslint": "^4.1.1",
-    "eslint-plugin-flowtype": "^2.34.1",
-    "eslint-plugin-import": "^2.6.0",
-    "eslint-plugin-jsx-a11y": "^6.0.2",
-    "eslint-plugin-react": "^7.8.2"
+    "babel-eslint": "^9.0.0",
+    "eslint": "^5.5.0",
+    "eslint-plugin-flowtype": "^2.50.1",
+    "eslint-plugin-import": "^2.14.0",
+    "eslint-plugin-jsx-a11y": "^6.1.1",
+    "eslint-plugin-react": "^7.11.1"
   },
   "dependencies": {
-    "confusing-browser-globals": "^1.0.0"
+    "@hellomouse/confusing-browser-globals": "^1.0.0"
   }
 }
