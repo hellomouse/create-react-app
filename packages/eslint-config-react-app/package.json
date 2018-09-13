@@ -1,6 +1,6 @@
 {
   "name": "@hellomouse/eslint-config-react-app",
-  "version": "2.1.1-custom",
+  "version": "2.1.1-custom.2",
   "description": "ESLint configuration used by Create React App",
   "repository": "hellomouse/create-react-app",
   "license": "MIT",
@@ -11,14 +11,14 @@
     "index.js"
   ],
   "peerDependencies": {
+    "eslint": "^5.5.0"
+  },
+  "dependencies": {
+    "@hellomouse/confusing-browser-globals": "^1.0.0",
     "babel-eslint": "^9.0.0",
-    "eslint": "^5.5.0",
     "eslint-plugin-flowtype": "^2.50.0",
     "eslint-plugin-import": "^2.14.0",
     "eslint-plugin-jsx-a11y": "^6.1.1",
     "eslint-plugin-react": "^7.11.1"
-  },
-  "dependencies": {
-    "@hellomouse/confusing-browser-globals": "^1.0.0"
   }
 }
