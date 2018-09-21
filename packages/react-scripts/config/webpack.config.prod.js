@@ -12,6 +12,7 @@ const autoprefixer = require('autoprefixer');
 const path = require('path');
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const InlineChunkHtmlPlugin = require('react-dev-utils/InlineChunkHtmlPlugin');
 const TerserPlugin = require('terser-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
@@ -23,6 +24,7 @@ const ModuleScopePlugin = require('react-dev-utils/ModuleScopePlugin');
 const getCSSModuleLocalIdent = require('react-dev-utils/getCSSModuleLocalIdent');
 const paths = require('./paths');
 const getClientEnvironment = require('./env');
+const getCacheIdentifier = require('react-dev-utils/getCacheIdentifier');
 
 // Webpack uses `publicPath` to determine where the app is being served from.
 // It requires a trailing slash, or the file assets will get an incorrect path.
@@ -268,20 +270,35 @@ module.exports = {
                 options: {
                   // @remove-on-eject-begin
                   babelrc: false,
-                  // @remove-on-eject-end
                   presets: [require.resolve('@hellomouse/babel-preset-react-app')],
+                  // Make sure we have a unique cache identifier, erring on the
+                  // side of caution.
+                  // We remove this when the user ejects because the default
+                  // is sane and uses Babel options. Instead of options, we use
+                  // the react-scripts and babel-preset-react-app versions.
+                  cacheIdentifier: getCacheIdentifier('production', [
+                    '@hellomouse/babel-plugin-named-asset-import',
+                    '@hellomouse/babel-preset-react-app',
+                    'react-dev-utils',
+                    'react-scripts',
+                  ]),
+                  // @remove-on-eject-end
                   plugins: [
                     [
                       require.resolve('@hellomouse/babel-plugin-named-asset-import'),
                       {
                         loaderMap: {
                           svg: {
-                            ReactComponent: 'svgr/webpack![path]',
+                            ReactComponent:
+                              '@svgr/webpack?-prettier,-svgo![path]',
                           },
                         },
                       },
                     ],
                   ],
+                  cacheDirectory: true,
+                  // Save disk space when time isn't as important
+                  cacheCompression: true,
                   compact: true,
                   highlightCode: true,
                 },
@@ -305,6 +322,16 @@ module.exports = {
                     require.resolve('@hellomouse/babel-preset-react-app/dependencies'),
                   ],
                   cacheDirectory: true,
+                  // Save disk space when time isn't as important
+                  cacheCompression: true,
+                  // @remove-on-eject-begin
+                  cacheIdentifier: getCacheIdentifier('production', [
+                    '@hellomouse/babel-plugin-named-asset-import',
+                    '@hellomouse/babel-preset-react-app',
+                    'react-dev-utils',
+                    'react-scripts',
+                  ]),
+                  // @remove-on-eject-end
                   highlightCode: true,
                 },
               },
@@ -408,6 +435,9 @@ module.exports = {
         minifyURLs: true,
       },
     }),
+    // Inlines the webpack runtime script. This script is too small to warrant
+    // a network request.
+    new InlineChunkHtmlPlugin(HtmlWebpackPlugin, [/runtime~.+[.]js/]),
     // Makes some environment variables available in index.html.
     // The public URL is available as %PUBLIC_URL% in index.html, e.g.:
     // <link rel="shortcut icon" href="%PUBLIC_URL%/favicon.ico">
