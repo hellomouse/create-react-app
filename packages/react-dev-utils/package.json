@@ -1,6 +1,6 @@
 {
   "name": "@hellomouse/react-dev-utils",
-  "version": "5.0.0",
+  "version": "5.0.0-custom",
   "description": "Webpack utilities used by Create React App",
   "repository": "facebook/create-react-app",
   "license": "MIT",

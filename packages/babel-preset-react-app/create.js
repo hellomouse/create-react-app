@@ -18,7 +18,7 @@ const validateBoolOption = (name, value, defaultValue) => {
   return value;
 };
 
-module.exports = function(api, opts, env) {
+module.exports = function (api, opts, env) {
   if (!opts) {
     opts = {};
   }
@@ -31,10 +31,10 @@ module.exports = function(api, opts, env) {
   if (!isEnvDevelopment && !isEnvProduction && !isEnvTest) {
     throw new Error(
       'Using `babel-preset-react-app` requires that you specify `NODE_ENV` or ' +
-        '`BABEL_ENV` environment variables. Valid values are "development", ' +
-        '"test", and "production". Instead, received: ' +
-        JSON.stringify(env) +
-        '.'
+      '`BABEL_ENV` environment variables. Valid values are "development", ' +
+      '"test", and "production". Instead, received: ' +
+      JSON.stringify(env) +
+      '.'
     );
   }
 
@@ -55,15 +55,15 @@ module.exports = function(api, opts, env) {
         {
           // We want Create React App to be IE 9 compatible until React itself
           // no longer works with IE 9
-          targets: {
+          /*targets: {
             ie: 9,
-          },
+          },*/
           // Users cannot override this behavior because this Babel
           // configuration is highly tuned for ES5 support
-          ignoreBrowserslistConfig: true,
+          ignoreBrowserslistConfig: false,
           // If users import all core-js they're probably not concerned with
           // bundle size. We shouldn't rely on magic to try and shrink it.
-          useBuiltIns: false,
+          useBuiltIns: true,
           // Do not transform modules to CJS
           modules: false,
         },
@@ -139,8 +139,8 @@ module.exports = function(api, opts, env) {
       // Adds syntax support for import()
       require('@babel/plugin-syntax-dynamic-import').default,
       isEnvTest &&
-        // Transform dynamic import to require
-        require('@hellomouse/babel-plugin-dynamic-import').default,
+      // Transform dynamic import to require
+      require('@hellomouse/babel-plugin-dynamic-import').default,
     ].filter(Boolean),
   };
 };
